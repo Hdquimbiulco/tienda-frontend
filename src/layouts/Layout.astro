@@ -59,7 +59,7 @@ const isActive = (href: string) => pathname === href;
             ))}
           </nav>
 
-          <button class="navegacion__carrito-btn js-cart-toggle" aria-label="Ver Carrito de Compras">
+          <button class="navegacion__carrito-btn js-cart-toggle" aria-label="Ver Carrito de Compras" aria-controls="cartDrawer" aria-expanded="false">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="9" cy="21" r="1"></circle>
               <circle cx="20" cy="21" r="1"></circle>
@@ -84,8 +84,8 @@ const isActive = (href: string) => pathname === href;
     </footer>
 
     <!-- Overlay & Drawer del Carrito -->
-    <div id="cartOverlay" class="cart-overlay"></div>
-    <aside id="cartDrawer" class="cart-drawer" aria-label="Carrito de compras">
+    <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+    <aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Carrito de compras">
       <div class="cart-drawer__header">
         <h3 class="cart-drawer__title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primario)" stroke-width="2">

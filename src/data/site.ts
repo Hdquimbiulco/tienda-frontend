@@ -44,23 +44,23 @@ export const storeFeatures = [
 
 export const aboutBenefits = [
   {
-    icon: 'A',
-    title: 'El mejor precio',
+    image: asset('img/icono_1.png'),
+    title: 'El Mejor Precio',
     description: 'Una propuesta clara, sin ruido visual, para que el producto hable primero.'
   },
   {
-    icon: 'B',
-    title: 'Para devs',
+    image: asset('img/icono_2.png'),
+    title: 'Para Devs',
     description: 'Una estética técnica y contemporánea pensada para una marca del mundo digital.'
   },
   {
-    icon: 'C',
-    title: 'Envío gratis',
+    image: asset('img/icono_3.png'),
+    title: 'Envío Gratis',
     description: 'Bloques de contenido más limpios y memorables, con foco en conversión.'
   },
   {
-    icon: 'D',
-    title: 'Mejor calidad',
+    image: asset('img/icono_4.png'),
+    title: 'La Mejor Calidad',
     description: 'Más profundidad, más orden y una base lista para crecer a un producto real.'
   }
 ];
