@@ -7,6 +7,8 @@ import { heroStats, products, storeFeatures } from '../data/site';
 
 const heroMosaic = products.slice(0, 4);
 const featuredProducts = products.slice(0, 12);
+const basePath = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const aboutUrl = `${basePath}nosotros/`;
 ---
 
 <Layout title="FrontEnd Store | Tienda moderna" description="FrontEnd Store renovada con Astro y Tailwind CSS.">
@@ -25,7 +27,7 @@ const featuredProducts = products.slice(0, 12);
 
       <div class="flex flex-wrap gap-3">
         <a href="#catalogo" class="cta-primary">Explorar catálogo</a>
-        <a href="/nosotros/" class="cta-secondary">Ver historia</a>
+        <a href={aboutUrl} class="cta-secondary">Ver historia</a>
       </div>
 
       <div class="grid gap-3 sm:grid-cols-3">

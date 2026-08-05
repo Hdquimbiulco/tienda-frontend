@@ -1,6 +1,17 @@
 // FrontEnd Store - Carrito de Compras Visual
 
 document.addEventListener('DOMContentLoaded', () => {
+    const configuredBase = document.querySelector('meta[name="app-base"]')?.content || '/';
+    const basePath = configuredBase.endsWith('/') ? configuredBase : `${configuredBase}/`;
+
+    function withBasePath(path) {
+        if (!path || /^(?:https?:)?\/\//.test(path) || path.startsWith('data:') || path.startsWith(basePath)) {
+            return path;
+        }
+
+        return `${basePath}${path.replace(/^\/+/, '')}`;
+    }
+
     // Obtener productos guardados en localStorage o iniciar con carrito vacío []
     let cartState = [];
     try {
@@ -71,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItemsContainer.innerHTML = cartState.map((item, index) => `
             <div class="cart-item" data-index="${index}">
-                <img src="${item.image}" alt="${item.name}" class="cart-item__img">
+                <img src="${withBasePath(item.image)}" alt="${item.name}" class="cart-item__img">
                 <div class="cart-item__details">
                     <div class="cart-item__header">
                         <h4 class="cart-item__title">${item.name}</h4>
@@ -176,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const size = sizeSelect ? sizeSelect.value : 'Mediana';
             const qty = qtyInput && qtyInput.value ? parseInt(qtyInput.value) : 1;
             const name = productNameEl ? productNameEl.textContent.trim() : 'Camiseta Dev';
-            const image = productImgEl ? productImgEl.getAttribute('src') : '/img/3.jpg';
+            const image = productImgEl ? productImgEl.getAttribute('src') : withBasePath('img/3.jpg');
 
             const existingIndex = cartState.findIndex(item => item.name === name && item.size === size);
             if (existingIndex > -1) {
@@ -206,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const name = addBtn.dataset.name || 'Camiseta Frontend';
             const price = parseFloat(addBtn.dataset.price || '25');
-            const image = addBtn.dataset.image || '/img/1.jpg';
+            const image = withBasePath(addBtn.dataset.image || 'img/1.jpg');
 
             const existingIndex = cartState.findIndex(item => item.name === name);
             if (existingIndex > -1) {
@@ -236,20 +247,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const imagenParam = urlParams.get('imagen') || urlParams.get('image');
 
         const productsData = {
-            '1': { name: 'VueJS', image: '/img/1.jpg', price: 25 },
-            '2': { name: 'AngularJS', image: '/img/2.jpg', price: 25 },
-            '3': { name: 'ReactJS', image: '/img/3.jpg', price: 25 },
-            '4': { name: 'Redux', image: '/img/4.jpg', price: 25 },
-            '5': { name: 'Node.js', image: '/img/5.jpg', price: 25 },
-            '6': { name: 'SASS', image: '/img/6.jpg', price: 25 },
-            '7': { name: 'HTML5', image: '/img/7.jpg', price: 25 },
-            '8': { name: 'Github', image: '/img/8.jpg', price: 25 },
-            '9': { name: 'BulmaCSS', image: '/img/9.jpg', price: 25 },
-            '10': { name: 'TypeScript', image: '/img/10.jpg', price: 25 },
-            '11': { name: 'Drupal', image: '/img/11.jpg', price: 25 },
-            '12': { name: 'JavaScript', image: '/img/12.jpg', price: 25 },
-            '13': { name: 'GraphQL', image: '/img/13.jpg', price: 25 },
-            '14': { name: 'WordPress', image: '/img/14.jpg', price: 25 }
+            '1': { name: 'VueJS', image: withBasePath('img/1.jpg'), price: 25 },
+            '2': { name: 'AngularJS', image: withBasePath('img/2.jpg'), price: 25 },
+            '3': { name: 'ReactJS', image: withBasePath('img/3.jpg'), price: 25 },
+            '4': { name: 'Redux', image: withBasePath('img/4.jpg'), price: 25 },
+            '5': { name: 'Node.js', image: withBasePath('img/5.jpg'), price: 25 },
+            '6': { name: 'SASS', image: withBasePath('img/6.jpg'), price: 25 },
+            '7': { name: 'HTML5', image: withBasePath('img/7.jpg'), price: 25 },
+            '8': { name: 'Github', image: withBasePath('img/8.jpg'), price: 25 },
+            '9': { name: 'BulmaCSS', image: withBasePath('img/9.jpg'), price: 25 },
+            '10': { name: 'TypeScript', image: withBasePath('img/10.jpg'), price: 25 },
+            '11': { name: 'Drupal', image: withBasePath('img/11.jpg'), price: 25 },
+            '12': { name: 'JavaScript', image: withBasePath('img/12.jpg'), price: 25 },
+            '13': { name: 'GraphQL', image: withBasePath('img/13.jpg'), price: 25 },
+            '14': { name: 'WordPress', image: withBasePath('img/14.jpg'), price: 25 }
         };
 
         let activeProduct = null;
@@ -271,10 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headingEl.textContent = activeProduct.name;
             }
             if (imageEl) {
-                let imgPath = activeProduct.image;
-                if (!imgPath.startsWith('/') && window.location.pathname.includes('/producto')) {
-                    imgPath = '/' + imgPath;
-                }
+                const imgPath = withBasePath(activeProduct.image);
                 imageEl.src = imgPath;
                 imageEl.alt = `Camiseta ${activeProduct.name}`;
             }

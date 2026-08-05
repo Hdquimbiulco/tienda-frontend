@@ -1,3 +1,6 @@
+const basePath = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const asset = (path: string) => `${basePath}${path.replace(/^\/+/, '')}`;
+
 export const heroStats = [
   { label: 'Piezas', value: '14' },
   { label: 'Entrega', value: '24h' },
@@ -5,20 +8,20 @@ export const heroStats = [
 ];
 
 export const products = [
-  { title: 'VueJS', price: '25', image: '/img/1.jpg', tag: 'Frontend' },
-  { title: 'AngularJS', price: '25', image: '/img/2.jpg', tag: 'Framework' },
-  { title: 'ReactJS', price: '25', image: '/img/3.jpg', tag: 'UI Stack' },
-  { title: 'Redux', price: '25', image: '/img/4.jpg', tag: 'State' },
-  { title: 'Node.js', price: '25', image: '/img/5.jpg', tag: 'Backend' },
-  { title: 'SASS', price: '25', image: '/img/6.jpg', tag: 'Styling' },
-  { title: 'HTML5', price: '25', image: '/img/7.jpg', tag: 'Markup' },
-  { title: 'Github', price: '25', image: '/img/8.jpg', tag: 'Workflow' },
-  { title: 'BulmaCSS', price: '25', image: '/img/9.jpg', tag: 'UI Kit' },
-  { title: 'TypeScript', price: '25', image: '/img/10.jpg', tag: 'Typed' },
-  { title: 'Drupal', price: '25', image: '/img/11.jpg', tag: 'CMS' },
-  { title: 'JavaScript', price: '25', image: '/img/12.jpg', tag: 'Core' },
-  { title: 'GraphQL', price: '25', image: '/img/13.jpg', tag: 'API' },
-  { title: 'WordPress', price: '25', image: '/img/14.jpg', tag: 'Content' }
+  { title: 'VueJS', price: '25', image: asset('img/1.jpg'), tag: 'Frontend' },
+  { title: 'AngularJS', price: '25', image: asset('img/2.jpg'), tag: 'Framework' },
+  { title: 'ReactJS', price: '25', image: asset('img/3.jpg'), tag: 'UI Stack' },
+  { title: 'Redux', price: '25', image: asset('img/4.jpg'), tag: 'State' },
+  { title: 'Node.js', price: '25', image: asset('img/5.jpg'), tag: 'Backend' },
+  { title: 'SASS', price: '25', image: asset('img/6.jpg'), tag: 'Styling' },
+  { title: 'HTML5', price: '25', image: asset('img/7.jpg'), tag: 'Markup' },
+  { title: 'Github', price: '25', image: asset('img/8.jpg'), tag: 'Workflow' },
+  { title: 'BulmaCSS', price: '25', image: asset('img/9.jpg'), tag: 'UI Kit' },
+  { title: 'TypeScript', price: '25', image: asset('img/10.jpg'), tag: 'Typed' },
+  { title: 'Drupal', price: '25', image: asset('img/11.jpg'), tag: 'CMS' },
+  { title: 'JavaScript', price: '25', image: asset('img/12.jpg'), tag: 'Core' },
+  { title: 'GraphQL', price: '25', image: asset('img/13.jpg'), tag: 'API' },
+  { title: 'WordPress', price: '25', image: asset('img/14.jpg'), tag: 'Content' }
 ];
 
 export const storeFeatures = [

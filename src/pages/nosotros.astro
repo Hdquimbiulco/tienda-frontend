@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import { aboutBenefits } from '../data/site';
+
+const basePath = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 ---
 
 <Layout title="FrontEnd Store | Nosotros" description="Conoce la propuesta y las ventajas de la tienda renovada.">
@@ -19,8 +21,8 @@ import { aboutBenefits } from '../data/site';
       </div>
 
       <div class="flex flex-wrap gap-3">
-        <a href="/producto/" class="cta-primary">Ver producto</a>
-        <a href="/#catalogo" class="cta-secondary">Ir al catálogo</a>
+        <a href={`${basePath}producto/`} class="cta-primary">Ver producto</a>
+        <a href={`${basePath}#catalogo`} class="cta-secondary">Ir al catálogo</a>
       </div>
 
       <div class="grid gap-3 sm:grid-cols-3">
@@ -42,7 +44,7 @@ import { aboutBenefits } from '../data/site';
     <div class="relative">
       <div class="absolute inset-0 rotate-3 rounded-[2.5rem] bg-gradient-to-br from-mint-400/20 via-white/5 to-sun-400/15 blur-3xl"></div>
       <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-glow">
-        <img src="/img/nosotros.jpg" alt="Equipo de FrontEnd Store" class="h-full w-full object-cover" />
+        <img src={`${basePath}img/nosotros.jpg`} alt="Equipo de FrontEnd Store" class="h-full w-full object-cover" />
         <div class="absolute inset-x-4 bottom-4 rounded-[1.5rem] border border-white/10 bg-ink-950/75 p-5 backdrop-blur-2xl sm:inset-x-6 sm:bottom-6">
           <p class="text-xs font-bold uppercase tracking-[0.3em] text-mint-300">Nuestra intención</p>
           <p class="mt-2 text-sm leading-6 text-slate-300">
