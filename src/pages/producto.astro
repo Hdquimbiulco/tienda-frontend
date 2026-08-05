@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import { productHighlights } from '../data/site';
+---
+
+<Layout title="FrontEnd Store | Producto" description="Ficha de producto con una presentación moderna y más visual.">
+  <section class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+    <div class="space-y-6">
+      <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-glow">
+        <img src="/img/3.jpg" alt="React JS" class="h-full w-full object-cover" />
+      </div>
+
+      <div class="grid gap-3 sm:grid-cols-3">
+        {productHighlights.map((highlight, index) => (
+          <article class="glass-surface rounded-[1.5rem] p-5">
+            <p class="text-xs font-bold uppercase tracking-[0.28em] text-mint-300">0{index + 1}</p>
+            <p class="mt-2 text-sm leading-6 text-slate-300">{highlight}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <aside class="glass-surface rounded-[2rem] p-6 sm:p-8 lg:sticky lg:top-28">
+      <span class="pill">Producto destacado</span>
+      <div class="mt-5 space-y-4">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="text-4xl font-black text-white sm:text-5xl">React JS</h1>
+            <p class="mt-2 text-sm uppercase tracking-[0.25em] text-mint-300">Collector edition</p>
+          </div>
+          <div class="rounded-2xl bg-sun-400/15 px-4 py-3 text-right">
+            <p class="text-xs font-bold uppercase tracking-[0.28em] text-sun-300">Precio</p>
+            <p class="font-display text-3xl font-black text-white">$25</p>
+          </div>
+        </div>
+
+        <p class="section-copy">
+          Una pieza con más peso visual, mejor composición y una presentación alineada con el nuevo sistema de la tienda.
+        </p>
+
+        <form class="space-y-4">
+          <label class="block space-y-2">
+            <span class="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">Talla</span>
+            <select class="w-full rounded-2xl border border-white/10 bg-ink-950/50 px-4 py-3 text-base text-white outline-none ring-0 transition focus:border-mint-300/60">
+              <option>Seleccionar talla</option>
+              <option>Chica</option>
+              <option>Mediana</option>
+              <option>Grande</option>
+            </select>
+          </label>
+
+          <label class="block space-y-2">
+            <span class="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">Cantidad</span>
+            <input type="number" min="1" value="1" class="w-full rounded-2xl border border-white/10 bg-ink-950/50 px-4 py-3 text-base text-white outline-none ring-0 transition focus:border-mint-300/60" />
+          </label>
+
+          <button type="submit" class="cta-primary w-full">Agregar al carrito</button>
+        </form>
+      </div>
+    </aside>
+  </section>
+
+  <section class="mt-16 space-y-8">
+    <SectionHeading
+      eyebrow="Detalles"
+      title="La ficha también se siente más premium"
+      description="Más profundidad, mejor orden y una composición que hace que el producto parezca parte de una tienda ya madura."
+    />
+
+    <div class="grid gap-5 md:grid-cols-3">
+      <FeatureCard icon="01" title="Material visible" description="La tarjeta usa contraste y capas para parecer más cercana a una interfaz comercial real." />
+      <FeatureCard icon="02" title="Conversión clara" description="El botón principal y los campos del formulario tienen más presencia visual." />
+      <FeatureCard icon="03" title="Base escalable" description="Este patrón puede crecer luego hacia carrito, filtros o checkout sin rehacer todo." />
+    </div>
+  </section>
+</Layout>

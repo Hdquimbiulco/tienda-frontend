@@ -1,0 +1,19 @@
+{
+  "name": "frontend-store",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@types/node": "^26.1.1",
+    "astro": "^7.0.7",
+    "autoprefixer": "^10.5.2",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,113 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'FrontEnd Store',
+  description = 'Tienda moderna para productos y cultura frontend'
+} = Astro.props as Props;
+
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const navItems = [
+  { href: '/', label: 'Tienda' },
+  { href: '/nosotros/', label: 'Nosotros' },
+  { href: '/producto/', label: 'Producto' }
+];
+
+const isActive = (href: string) => pathname === href;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#07111f" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink-950">Saltar al contenido</a>
+
+    <div class="fixed inset-0 -z-10 bg-hero-grid"></div>
+
+    <header class="sticky top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-[1.75rem] border border-white/10 bg-white/5 px-4 py-3 shadow-glow backdrop-blur-2xl sm:px-6">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/img/logo.png" alt="FrontEnd Store" class="h-10 w-auto sm:h-12" />
+        </a>
+
+        <div class="flex items-center gap-3">
+          <nav class="flex items-center gap-1 rounded-full border border-white/10 bg-ink-950/30 p-1 text-sm font-bold text-slate-300">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  'rounded-full px-4 py-2 transition duration-200 hover:bg-white/10 hover:text-white sm:px-5',
+                  isActive(item.href) && 'bg-white/10 text-white shadow-inner'
+                ]}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <button class="navegacion__carrito-btn js-cart-toggle" aria-label="Ver Carrito de Compras">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="hidden sm:inline">Carrito</span>
+            <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido" class="mx-auto w-full max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-white/10 bg-ink-950/40 px-4 py-8 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <p class="font-display text-sm font-bold uppercase tracking-[0.3em] text-white">FrontEnd Store</p>
+        <p class="text-sm text-slate-400">Una evolución visual más moderna, clara y escalable con Astro + Tailwind.</p>
+      </div>
+    </footer>
+
+    <!-- Overlay & Drawer del Carrito -->
+    <div id="cartOverlay" class="cart-overlay"></div>
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Carrito de compras">
+      <div class="cart-drawer__header">
+        <h3 class="cart-drawer__title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primario)" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          Tu Carrito
+        </h3>
+        <button id="cartCloseBtn" class="cart-drawer__close" aria-label="Cerrar carrito">&times;</button>
+      </div>
+      <div id="cartItemsContainer" class="cart-drawer__body">
+        <!-- Items de compra se renderizan dinámicamente -->
+      </div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__summary">
+          <span class="cart-drawer__total-label">Total estimado:</span>
+          <span id="cartTotal" class="cart-drawer__total-val">$0.00</span>
+        </div>
+        <div class="cart-drawer__notice">
+          ✨ Artículos listos para su compra
+        </div>
+      </div>
+    </aside>
+
+    <script is:inline src="/js/cart.js"></script>
+  </body>
+</html>
